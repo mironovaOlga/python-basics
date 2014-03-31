@@ -1,6 +1,6 @@
 #from console_tests import *
 #import console_tests
-#cmd example C:\Users\Olga\git\python-basics>C:\Python27\python -m olga olga.console_tests
+#cmd example C:\Users\Olga\git\python-basics>C:\Python27\python -m olga olga.autotest.console_tests
 # result echo %errorlevel%
 from runner import runner
 import sys
