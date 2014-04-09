@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 #encoding:UTF-8
+
 import urllib2
 import json
 import os
@@ -37,14 +38,10 @@ class Currency(object):
     
     RUB = "rub"
     USD = "$"
-    EUR = "в‚¬"
+    EUR = "€"
     CODES =["RUB", "USD", "EUR"]
     RATES_URL = "http://andreysalomatin.me/exchange-rates?"
     LOG_DIR = "C:\\test-results\[{base}]-[{year}][{month}][{day}].txt"
-    
-    #rates = {RUB: {USD: 1/35, EUR: 1/50,RUB: 1},
-    ##         USD: {USD: 1, EUR: 0.8,RUB: 35},
-    #         EUR: {USD: 1.4, EUR: 1,RUB: 50}}
     
     exchange_rate = {}
     
@@ -56,9 +53,6 @@ class Currency(object):
                                            year=datetime.now().year,
                                            month=datetime.now().month,
                                            day=datetime.now().day)
-        
-        if not os.path.exists(os.path.dirname(self.LOG_DIR)):
-            os.makedirs(os.path.dirname(self.LOG_DIR))
         
         if not os.path.exists(self.LOG_DIR):
             self.exchange_rate = {x: json.load(urllib2.urlopen(self.RATES_URL + x))["rate"]
@@ -97,7 +91,7 @@ class Currency(object):
 
 RUB = Currency("rub")
 USD = Currency("$")
-EUR = Currency("в‚¬")
+EUR = Currency("€")
 
 def rubles(amount):
         return Money(RUB, amount)
@@ -121,10 +115,11 @@ class StoredRates(dict):
             self.update({row[0]: row[1] for row in rates})
             #print self
     
+    '''
     def __getitem__(self, key):
         if self.has_key(key):
             return super( StoredRates, self).__getitem__(key)
-        return None
+        return None'''
     
     def __setitem__(self, key, value):
         if self.has_key(key):
